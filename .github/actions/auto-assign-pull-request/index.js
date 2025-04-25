@@ -147,16 +147,16 @@ async function isUserIdle(user) {
 
 async function numberOfPr(criteria) {
   try {
-    const { data } = await octokit.rest.search.issuesAndPullRequests({
+    const prs = await octokit.rest.search.issuesAndPullRequests({
         // q: `type:pr is:open ${criteria} repo:${repo.owner}/${repo.repo}`
         q: `type:pr is:open ${criteria} repo:TMD-DX-Mobile/hbmc`
     });
     // console.log(`Query='type:pr is:open ${criteria} repo:${repo.owner}/${repo.repo}'`);
     console.log(`Query='type:pr is:open ${criteria} repo:TMD-DX-Mobile/hbmc'`);
-    console.log(`data=${data}`);
+    console.log(`data=${prs.data}`);
 
-    console.log(`Number of PRs where ${criteria}: ${data.total_count}`);
-    return data.total_count;
+    console.log(`Number of PRs where ${criteria}: ${prs.data.total_count}`);
+    return prs.data.total_count;
   } catch (error) {
     console.error('Error while retrieving PRs:', error.message);
     return 0;
