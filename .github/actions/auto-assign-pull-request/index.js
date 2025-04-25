@@ -134,8 +134,8 @@ function squadOfPrOpener() {
 async function isUserIdle(user) {
   try {
     const userPrReviewRequestedCount = await numberOfPr(`review-requested:${user}`);
-    const userPrReviewedCount = await numberOfPr(`reviewed-by:${user}`);
-    const userPrInvolvedCount = userPrReviewRequestedCount + userPrReviewedCount;
+    const userPrAssignedCount = await numberOfPr(`assignee:${user}`);
+    const userPrInvolvedCount = userPrReviewRequestedCount + userPrAssignedCount;
 
     console.log(`Number of PRs where ${user} is involved: ${userPrInvolvedCount}`);
     return userPrInvolvedCount <= maxPrPerUser;
@@ -147,16 +147,16 @@ async function isUserIdle(user) {
 
 async function numberOfPr(criteria) {
   try {
-    const { result } = await octokit.rest.search.issuesAndPullRequests({
+    const { data } = await octokit.rest.search.issuesAndPullRequests({
         // q: `type:pr is:open ${criteria} repo:${repo.owner}/${repo.repo}`
         q: `type:pr is:open ${criteria} repo:TMD-DX-Mobile/hbmc`
     });
     // console.log(`Query='type:pr is:open ${criteria} repo:${repo.owner}/${repo.repo}'`);
     console.log(`Query='type:pr is:open ${criteria} repo:TMD-DX-Mobile/hbmc'`);
-    console.log(`result=${result}`);
+    console.log(`data=${data}`);
 
-    console.log(`Number of PRs where ${criteria}: ${result.total_count}`);
-    return result.total_count;
+    console.log(`Number of PRs where ${criteria}: ${data.total_count}`);
+    return data.total_count;
   } catch (error) {
     console.error('Error while retrieving PRs:', error.message);
     return 0;
