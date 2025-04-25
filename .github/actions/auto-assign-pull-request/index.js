@@ -148,9 +148,11 @@ async function isUserIdle(user) {
 async function numberOfPr(criteria) {
   try {
     const { result } = await octokit.rest.search.issuesAndPullRequests({
-        q: `type:pr is:open ${criteria} repo:${repo.owner}/${repo.repo}`
+        // q: `type:pr is:open ${criteria} repo:${repo.owner}/${repo.repo}`
+        q: `type:pr is:open ${criteria} repo:TMD-DX-Mobile/hbmc`
     });
-    console.log(`Query='type:pr is:open ${criteria} repo:${repo.owner}/${repo.repo}'`);
+    // console.log(`Query='type:pr is:open ${criteria} repo:${repo.owner}/${repo.repo}'`);
+    console.log(`Query='type:pr is:open ${criteria} repo:TMD-DX-Mobile/hbmc'`);
     console.log(`result=${result}`);
 
     console.log(`Number of PRs where ${criteria}: ${result.total_count}`);
