@@ -1,0 +1,8 @@
+name: Auto-Assign
+description: Auto-Assign
+inputs:
+  myToken:
+    required: true
+runs:
+  using: 'node16'
+  main: 'index.js'
