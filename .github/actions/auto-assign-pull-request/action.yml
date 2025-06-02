@@ -6,3 +6,8 @@ inputs:
 runs:
   using: 'node20'
   main: 'index.js'
+
+pre:
+  steps:
+    - run: npm ci
+      shell: bash
