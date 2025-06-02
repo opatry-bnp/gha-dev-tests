@@ -2,14 +2,14 @@ name: Auto-Assign
 
 on:
   pull_request:
-    types: [opened, ready_for_review]
+    types: [opened, ready_for_review, reopened]
 
 jobs:
   Auto-assign-pull-requests:
     runs-on: ubuntu-latest
     name: Auto-assign reviewers to pull-request
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./.github/actions/auto-assign-pull-request
         with:
           myToken: ${{ secrets.GITHUB_TOKEN }}
