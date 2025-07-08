@@ -1,0 +1,51 @@
+name: Tag TOTO
+
+on:
+  workflow_dispatch:
+    inputs:
+      mescomptes:
+        description: "Tag 'Mes Comptes' App"
+        required: true
+        type: boolean
+        default: true
+      hellobank:
+        description: "Tag 'Hello Bank!' App"
+        required: true
+        type: boolean
+        default: true
+      delete_remote_branch:
+        description: "Delete remote branch"
+        required: false
+        type: boolean
+        default: false
+      sha1:
+        description: "Exact sha1 to tag (defaults to branch's HEAD)"
+        required: false
+        type: string
+      message:
+        description: "Quick release info used in tag message (append after branch name)"
+        required: false
+        type: string
+
+jobs:
+   tag:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: 📌 Tag repository
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        TAG_MC: ${{ inputs.mescomptes }}
+        TAG_HB: ${{ inputs.hellobank }}
+        DELETE_REMOTE_BRANCH: ${{ inputs.delete_remote_branch }}
+        TAG_SHA1: ${{ inputs.sha1 }}
+        RELEASE_MESSAGE: ${{ inputs.message }}
+      run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          ./tag_release.sh "${GITHUB_TOKEN}" "${TAG_HB}" "${DELETE_REMOTE_BRANCH}" "${TAG_SHA1}" "${RELEASE_MESSAGE}"
