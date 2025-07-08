@@ -30,6 +30,8 @@ on:
 jobs:
    some-job2:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
 
     steps:
     - uses: actions/checkout@v4
@@ -37,5 +39,7 @@ jobs:
         fetch-depth: 0
 
     - name: 📌 Tag repository
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
           ./tag_release.sh "${{ inputs.mescomptes }}" "${{ inputs.hellobank }}" "${{ inputs.delete_remote_branch }}" "${{ inputs.blah_sha1 }}" "${{ inputs.message }}"
