@@ -22,13 +22,15 @@ fi
 
 if [ "${tag_mescomptes}" != true ] && [ "${tag_hellobank}" != true ]; then
   echo "Neither 'Mes Comptes' nor 'Hello Bank!' are requested for tagging, nothing to do which is not expected, please choose at least one."
-  exit 1
+  exit 52
 fi
 
 if ! git cat-file -e "${sha1}"^{commit}; then
   echo "Invalid sha1 provided '${sha1}'."
-  exit 1
+  exit 42
 fi
+
+echo "tag_mescomptes=$tag_mescomptes ; tag_hellobank=$tag_hellobank ; delete_remote_branch=$delete_remote_branch ; sha1=$sha1"
 
 created_tags=()
 
@@ -75,7 +77,8 @@ create_and_push_tag() {
   local tag_name="${tag_prefix}${version_name}"
   local tag_message="🚀 Published ${flavor_name} version ${version_name} on Play Store (${message})"
 
-  git tag -a "${tag_name}" -m "${tag_message}" "${sha1}"
+  echo "git tag -a \"${tag_name}\" -m \"${tag_message}\" \"${sha1}\""
+  # git tag -a "${tag_name}" -m "${tag_message}" "${sha1}"
   created_tags+=("${tag_name}")
 }
 
@@ -89,7 +92,8 @@ fi
 
 # everything was fine, we can safely push changes remotely
 for tag_name in ${created_tags[*]}; do
-  git push origin "${tag_name}"
+  echo "push ${tag_name}"
+  # git push origin "${tag_name}"
 done
 
 if [ "$delete_remote_branch" = true ]; then
