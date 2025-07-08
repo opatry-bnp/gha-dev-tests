@@ -25,7 +25,7 @@ if [ "${tag_mescomptes}" != true ] && [ "${tag_hellobank}" != true ]; then
   exit 52
 fi
 
-if ! git cat-file -e "${sha1}"^{commit}; then
+if ! git cat-file -t "${sha1}"; then
   echo "Invalid sha1 provided '${sha1}'."
   exit 42
 fi
