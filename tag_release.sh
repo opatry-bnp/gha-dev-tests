@@ -78,7 +78,7 @@ create_and_push_tag() {
   local tag_message="🚀 Published ${flavor_name} version ${version_name} on Play Store (${message})"
 
   echo "git tag -a \"${tag_name}\" -m \"${tag_message}\" \"${sha1}\""
-  # git tag -a "${tag_name}" -m "${tag_message}" "${sha1}"
+  git tag -a "${tag_name}" -m "${tag_message}" "${sha1}"
   created_tags+=("${tag_name}")
 }
 
@@ -91,9 +91,9 @@ if [ "${tag_hellobank}" = true ]; then
 fi
 
 # everything was fine, we can safely push changes remotely
-for tag_name in ${created_tags[*]}; do
+for tag_name in "${created_tags[@]}"; do
   echo "push ${tag_name}"
-  # git push origin "${tag_name}"
+  git push origin "${tag_name}"
 done
 
 if [ "$delete_remote_branch" = true ]; then
