@@ -29,7 +29,6 @@ on:
 
 jobs:
    tag:
-
     runs-on: ubuntu-latest
     permissions:
       contents: write
