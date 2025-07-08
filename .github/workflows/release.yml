@@ -43,8 +43,8 @@ jobs:
         TAG_MC: ${{ inputs.mescomptes }}
         TAG_HB: ${{ inputs.hellobank }}
         DELETE_REMOTE_BRANCH: ${{ inputs.delete_remote_branch }}
-        TAG_SHA1: ${{ inputs.sha1 }}
-        RELEASE_MESSAGE: ${{ inputs.message }}
+        TAG_SHA1: "${{ inputs.sha1 }}"
+        RELEASE_MESSAGE: "${{ inputs.message }}"
       run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
