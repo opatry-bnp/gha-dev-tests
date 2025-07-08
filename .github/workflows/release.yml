@@ -41,4 +41,7 @@ jobs:
     - name: 📌 Tag repository
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: ./tag_release.sh "${{ inputs.mescomptes }}" "${{ inputs.hellobank }}" "${{ inputs.delete_remote_branch }}" "${{ inputs.blah_sha1 }}" "${{ inputs.message }}"
+      run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          ./tag_release.sh "${{ inputs.mescomptes }}" "${{ inputs.hellobank }}" "${{ inputs.delete_remote_branch }}" "${{ inputs.blah_sha1 }}" "${{ inputs.message }}"
