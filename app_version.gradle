@@ -1,0 +1,15 @@
+ext {
+    buildNumber = System.getenv('BUILD_NUMBER') ? System.getenv('BUILD_NUMBER').toInteger() % 10000 : 0
+
+    hellobankMajorVersion = 3 // Max : 20
+    hellobankMinorVersion = 51 // Max : 999
+    hellobankPatchVersion = 0 // Max 9
+    hellobankVersionCode = hellobankMajorVersion * 100_000_000 + hellobankMinorVersion * 100_000 + hellobankPatchVersion * 10_000 + buildNumber
+    hellobankVersionName = hellobankMajorVersion + "." + hellobankMinorVersion + "." + hellobankPatchVersion
+
+    mescomptesMajorVersion = 5 // Max : 20
+    mescomptesMinorVersion = 9 // Max : 999
+    mescomptesPatchVersion = 0 // Max 9
+    mescomptesVersionCode = mescomptesMajorVersion * 100_000_000 + mescomptesMinorVersion * 100_000 + mescomptesPatchVersion * 10_000 + buildNumber
+    mescomptesVersionName = mescomptesMajorVersion + "." + mescomptesMinorVersion + "." + mescomptesPatchVersion
+}
