@@ -18,7 +18,7 @@ on:
         required: false
         type: boolean
         default: false
-      sha1:
+      blah_sha1:
         description: "Exact sha1 to tag (defaults to branch's HEAD)"
         required: false
         type: string
@@ -28,7 +28,7 @@ on:
         type: string
 
 jobs:
-   some-job:
+   some-job2:
     runs-on: ubuntu-latest
 
     steps:
@@ -36,4 +36,4 @@ jobs:
 
     - name: 📌 Tag repository
       run: |
-          ./tag_release.sh "${{ inputs.mescomptes }}" "${{ inputs.hellobank }}" "${{ inputs.delete_remote_branch }}" "${{ inputs.sha1 }}" "${{ inputs.message }}"
+          ./tag_release.sh "${{ inputs.mescomptes }}" "${{ inputs.hellobank }}" "${{ inputs.delete_remote_branch }}" "${{ inputs.blah_sha1 }}" "${{ inputs.message }}"
