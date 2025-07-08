@@ -30,15 +30,12 @@ on:
 jobs:
    tag:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
     - uses: actions/checkout@v4
 
     - name: 📌 Tag repository
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TAG_MC: ${{ inputs.mescomptes }}
         TAG_HB: ${{ inputs.hellobank }}
         DELETE_REMOTE_BRANCH: ${{ inputs.delete_remote_branch }}
@@ -47,4 +44,4 @@ jobs:
       run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
-          ./tag_release.sh "${GITHUB_TOKEN}" "${TAG_HB}" "${DELETE_REMOTE_BRANCH}" "${TAG_SHA1}" "${RELEASE_MESSAGE}"
+          ./tag_release.sh "${TAG_MC}" "${TAG_HB}" "${DELETE_REMOTE_BRANCH}" "${TAG_SHA1}" "${RELEASE_MESSAGE}"
