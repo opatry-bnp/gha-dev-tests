@@ -19,11 +19,11 @@ on:
         type: boolean
         default: false
       sha1:
-        description: "Exact sha1 to tag (defaults branch's HEAD)"
+        description: "Exact sha1 to tag (defaults to branch's HEAD)"
         required: false
         type: string
       message:
-        description: "Quick release context info used in tag message (defaults to branch name)"
+        description: "Quick release message detail used in tag message (defaults to branch name)"
         required: false
         type: string
 
