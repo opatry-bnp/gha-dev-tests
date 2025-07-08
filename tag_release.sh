@@ -25,10 +25,10 @@ if [ "${tag_mescomptes}" != true ] && [ "${tag_hellobank}" != true ]; then
   exit 52
 fi
 
-# if ! git cat-file -t "${sha1}"; then
-#   echo "Invalid sha1 provided '${sha1}'."
-#   exit 42
-# fi
+if ! git cat-file -t "${sha1}"; then
+  echo "Invalid sha1 provided '${sha1}'."
+  exit 42
+fi
 
 echo "tag_mescomptes=$tag_mescomptes ; tag_hellobank=$tag_hellobank ; delete_remote_branch=$delete_remote_branch ; sha1=$sha1"
 
