@@ -23,7 +23,7 @@ on:
         required: false
         type: string
       message:
-        description: "Quick release message detail used in tag message (defaults to branch name)"
+        description: "Quick release info used in tag message (append after branch name)"
         required: false
         type: string
 

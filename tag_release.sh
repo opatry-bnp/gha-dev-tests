@@ -4,7 +4,7 @@ set -euo pipefail
 
 head_sha1=$(git rev-parse HEAD)
 branch_name=$(git rev-parse --abbrev-ref HEAD)
-fallback_message="from ${branch_name}"
+branch_message="from ${branch_name}"
 
 tag_mescomptes=${1:-false}
 tag_hellobank=${2:-false}
@@ -13,9 +13,11 @@ sha1=${4:-""}
 if [ -z "${sha1}" ]; then
   sha1="${head_sha1}"
 fi
-message=${5:-""}
-if [ -z "${message}" ]; then
-  message="${fallback_message}"
+extra_message=${5:-""}
+if [ -z "${extra_message}" ]; then
+  message="${branch_message}"
+else
+  message="${branch_message} - ${extra_message}"
 fi
 
 if [ "${tag_mescomptes}" != true ] && [ "${tag_hellobank}" != true ]; then
