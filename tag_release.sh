@@ -20,6 +20,11 @@ else
   message="${branch_message} - ${extra_message}"
 fi
 
+if [[ "${branch_name}" != "release/"* ]]; then
+  echo "${branch_name} is not a release branch (release/*), tagging it is not expected"
+  exit 1
+fi
+
 echo "Tag release workflow summary"
 echo "----------------------------"
 echo " - Tag Mes Comptes: ${tag_mescomptes}"
