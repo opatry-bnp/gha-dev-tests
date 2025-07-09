@@ -20,6 +20,14 @@ else
   message="${branch_message} - ${extra_message}"
 fi
 
+echo "Tag release workflow summary"
+echo "----------------------------"
+echo " - Tag Mes Comptes: ${tag_mescomptes}"
+echo " - Tag Hello Bank: ${tag_hellobank}"
+echo " - Delete remote branch ${branch_name}: ${delete_remote_branch}"
+echo " - sha1 to tag: ${sha1}"
+echo " - Extra message: ${extra_message}"
+
 if [ "${tag_mescomptes}" != true ] && [ "${tag_hellobank}" != true ]; then
   echo "Neither 'Mes Comptes' nor 'Hello Bank!' are requested for tagging, nothing to do which is not expected, please choose at least one."
   exit 1
@@ -29,8 +37,6 @@ if ! git cat-file -t "${sha1}"; then
   echo "Invalid sha1 provided '${sha1}'."
   exit 1
 fi
-
-echo "tag_mescomptes=$tag_mescomptes ; tag_hellobank=$tag_hellobank ; delete_remote_branch=$delete_remote_branch ; sha1=$sha1"
 
 created_tags=()
 
@@ -83,7 +89,7 @@ create_and_push_tag() {
     exit 1
   fi
 
-  echo "git tag -a \"${tag_name}\" -m \"${tag_message}\" \"${sha1}\""
+  echo "Create tag '${tag_name}' with message '${tag_message}' on '${sha1}'"
   git tag -a "${tag_name}" -m "${tag_message}" "${sha1}"
   created_tags+=("${tag_name}")
 }
@@ -97,11 +103,12 @@ if [ "${tag_hellobank}" = true ]; then
 fi
 
 # everything was fine, we can safely push changes remotely
+echo "Push created tag(s) remotely"
 for tag_name in "${created_tags[@]}"; do
-  echo "push ${tag_name}"
   git push origin "${tag_name}"
 done
 
-if [ "$delete_remote_branch" = true ]; then
-  git push --delete origin "${branch_name}"
+if [ "${delete_remote_branch}" = true ]; then
+  echo "Delete remote branch '${branch_name}'"
+  git push origin --delete "${branch_name}"
 fi
