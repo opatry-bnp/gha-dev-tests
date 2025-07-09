@@ -45,7 +45,7 @@ fi
 
 created_tags=()
 
-create_and_push_tag() {
+create_tag() {
   local flavor="$1"
   local sha1="$2"
   local message="$3"
@@ -100,11 +100,11 @@ create_and_push_tag() {
 }
 
 if [ "${tag_mescomptes}" = true ]; then
-  create_and_push_tag "mescomptes" "${sha1}" "${message}"
+  create_tag "mescomptes" "${sha1}" "${message}"
 fi
 
 if [ "${tag_hellobank}" = true ]; then
-  create_and_push_tag "hellobank" "${sha1}" "${message}"
+  create_tag "hellobank" "${sha1}" "${message}"
 fi
 
 # everything was fine, we can safely push changes remotely
