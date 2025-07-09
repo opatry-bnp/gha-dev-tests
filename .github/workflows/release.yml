@@ -28,7 +28,7 @@ on:
         type: string
 
 jobs:
-   some-job2:
+   tag-release:
     runs-on: ubuntu-latest
     permissions:
       contents: write
