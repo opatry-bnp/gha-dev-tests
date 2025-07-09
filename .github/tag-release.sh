@@ -38,8 +38,14 @@ if [ "${tag_mescomptes}" != true ] && [ "${tag_hellobank}" != true ]; then
   exit 1
 fi
 
-if ! git cat-file -t "${sha1}"; then
+if ! git cat-file -t "${sha1}" >/dev/null 2>&1; then
   echo "Invalid sha1 provided '${sha1}'."
+  exit 1
+fi
+
+merge_base=$(git merge-base origin/develop "${branch_name}")
+if ! git merge-base --is-ancestor "${sha1}" "${branch_name}" || ! git merge-base --is-ancestor "${merge_base}" "${sha1}"; then
+  echo "Provided sha1 '${sha1}' is not part of the branch '${branch_name}' (not between the base and HEAD)"
   exit 1
 fi
 
