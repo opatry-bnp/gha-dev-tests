@@ -77,6 +77,12 @@ create_and_push_tag() {
   local tag_name="${tag_prefix}${version_name}"
   local tag_message="🚀 Published ${flavor_name} version ${version_name} on Play Store (${message})"
 
+  if git rev-parse "${tag_name}" >/dev/null 2>&1; then
+    local tag_sha1=$(git rev-parse "${tag_name}")
+    echo "Tag '${tag_name}' already exists (${tag_sha1})"
+    exit 1
+  fi
+
   echo "git tag -a \"${tag_name}\" -m \"${tag_message}\" \"${sha1}\""
   git tag -a "${tag_name}" -m "${tag_message}" "${sha1}"
   created_tags+=("${tag_name}")
