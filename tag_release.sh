@@ -29,7 +29,7 @@ echo " - sha1 to tag: ${sha1}"
 echo " - Extra message: ${extra_message}"
 
 if [ "${tag_mescomptes}" != true ] && [ "${tag_hellobank}" != true ]; then
-  echo "Neither 'Mes Comptes' nor 'Hello Bank!' are requested for tagging, nothing to do which is not expected, please choose at least one."
+  echo "Neither 'Mes Comptes' nor 'Hello Bank!' are requested for tagging, nothing to do which is unexpected, please choose at least one."
   exit 1
 fi
 
