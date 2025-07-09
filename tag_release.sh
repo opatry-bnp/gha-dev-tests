@@ -24,7 +24,7 @@ echo "Tag release workflow summary"
 echo "----------------------------"
 echo " - Tag Mes Comptes: ${tag_mescomptes}"
 echo " - Tag Hello Bank: ${tag_hellobank}"
-echo " - Delete remote branch ${branch_name}: ${delete_remote_branch}"
+echo " - Delete remote branch '${branch_name}': ${delete_remote_branch}"
 echo " - sha1 to tag: ${sha1}"
 echo " - Extra message: ${extra_message}"
 
