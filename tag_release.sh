@@ -22,12 +22,12 @@ fi
 
 if [ "${tag_mescomptes}" != true ] && [ "${tag_hellobank}" != true ]; then
   echo "Neither 'Mes Comptes' nor 'Hello Bank!' are requested for tagging, nothing to do which is not expected, please choose at least one."
-  exit 52
+  exit 1
 fi
 
 if ! git cat-file -t "${sha1}"; then
   echo "Invalid sha1 provided '${sha1}'."
-  exit 42
+  exit 1
 fi
 
 echo "tag_mescomptes=$tag_mescomptes ; tag_hellobank=$tag_hellobank ; delete_remote_branch=$delete_remote_branch ; sha1=$sha1"
